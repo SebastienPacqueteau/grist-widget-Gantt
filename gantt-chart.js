@@ -27,6 +27,18 @@ let colonnesNecessaires = [
   {name: 'Priorite',title: "Priorite du projet pour le service et la direction",type: 'Int',optional: true}
 ];
 
+class Projet{
+	constructor(nomProjet,dateDebut,dateFin,agent,service,sousDirection, quotite,priorite){
+		//this.infoSiret = infoSiret.results[0];
+		this.x = [dateDebut,dateFin];
+		this.y = nomProjet;
+		this.Agents = agent;
+		this.Service = service;
+		this.SousDirection = sousDirection;
+		this.Quotite = quotite;
+		this.Priorite = priorite;
+	}
+}
 
 // ====================================
 // ==== Configuration du diagramme ====
@@ -41,19 +53,7 @@ dateFinGantt.setMonth(dateFinGantt.getMonth() + 6);
 
 
 //liste des projets à connecter à un tableau Grist
-let listeProjets = [
-	{x:['2025-09-01','2025-09-02'], y:'Projet 1', Agents: 'Agent 1', Service: 'Service 1', SousDirection: 'SD1', Quotite: '10%', Priorite:'P1'},
-	{x:['2025-08-01','2025-10-02'], y:'Projet 2', Agents: 'Agent 2', Service: 'Service 2', SousDirection: 'SD2', Quotite: '20%', Priorite:'P2'},
-	{x:['2025-08-01','2025-10-02'], y:'Projet 3', Agents: 'Agent 3', Service: 'Service 3', SousDirection: 'SD3', Quotite: '30%', Priorite:'P3'},
-	{x:['2025-08-15','2025-09-01'], y:'Projet 4', Agents: 'Agent 4', Service: 'Service 4', SousDirection: 'SD4', Quotite: '40%', Priorite:'P1'},
-	{x:['2025-08-01','2025-10-02'], y:'Projet 5', Agents: 'Agent 5', Service: 'Service 5', SousDirection: 'SD5', Quotite: '50%', Priorite:'P2'},
-	{x:['2025-08-15','2025-09-01'], y:'Projet 6', Agents: 'Agent 6', Service: 'Service 6', SousDirection: 'SD6', Quotite: '60%', Priorite:'P3'},
-	{x:['2025-08-01','2025-10-02'], y:'Projet 7', Agents: 'Agent 7', Service: 'Service 7', SousDirection: 'SD7', Quotite: '70%', Priorite:'P1'},
-	{x:['2025-08-15','2025-09-01'], y:'Projet 8', Agents: 'Agent 8', Service: 'Service 8', SousDirection: 'SD8', Quotite: '80%', Priorite:'P1'},
-	{x:['2025-08-01','2025-10-02'], y:'Projet 9', Agents: 'Agent 9', Service: 'Service 9', SousDirection: 'SD9', Quotite: '90%', Priorite:'P2'},
-	{x:['2025-08-15','2025-09-01'], y:'Projet 10', Agents: 'Agent 10', Service: 'Service 10', SousDirection: 'SD10', Quotite: '55%', Priorite:'P2'},
-	{x:['2025-09-01','2025-09-10'], y:'Projet 11', Agents: 'Agent 11', Service: 'Service 11', SousDirection: 'SD10', Quotite: '45%', Priorite:'P2'}
-];
+let listeProjets = [];
 
 //Données pour le graphique
 const data = {
@@ -209,7 +209,21 @@ if (listeProjets.length>10){
 // ==== fonctions propres à Grist =====
 // ====================================
 
-console.log('fichierGanttChart chargé');
+function creerlisteProjets(tableauGrist, tableauProjets, colonnes){
+	let projet = null;
+	tableauGrist.forEach((ligne, i) => {
+		projet = new Projet(ligne[colonnes.Projet],
+			ligne[colonnes.DateDebut],
+			ligne[colonnes.DateFin],
+			ligne[colonnes.Agents],
+			ligne[colonnes.Service],
+			ligne[colonnes.SousDirection],
+			ligne[colonnes.Quotite],
+			ligne[colonnes.Priorite]);
+		tableauProjets.push(projet);
+	});
+
+}
 
 grist.ready({
   columns: colonnesNecessaires,
@@ -218,12 +232,11 @@ grist.ready({
 });
 
 grist.onRecords((table, mappings) => {
-	if (mapped) {
+	if (mappings) {
 		tableau = table;
 		colonnes = mappings;
 		//nomTableau = ;
-
-
+		creerlisteProjets(tableau, listeProjets, colonnes);
 		// Création du diagramme après initialisation du module Grist:
 		const myChart = new Chart(
 		  document.getElementById('myChart'),
@@ -232,6 +245,7 @@ grist.onRecords((table, mappings) => {
 		console.log('Grist onRecords');
 		console.log(tableau);
 		console.log(colonnes);
+		console.log(listeProjets);
     }
 	else{
 		alert("Please map all columns")
