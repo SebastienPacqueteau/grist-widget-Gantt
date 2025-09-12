@@ -15,8 +15,8 @@ let colonnesNecessaires = [
     type: 'Any', // optional type of the column, // Int (Integer column), Numeric (Numeric column), Text, Date, DateTime, Bool (Toggle column), Choice, ChoiceList, Ref (Reference column), RefList (Reference List), Attachments.
 		optional: false // if column is optional.
 	},
-	{name: 'NbAgents',title: "Nombre d'Agents sur le projet",type: 'Int',optional: false},
-  {name: 'Agents',title: "liste des agents",type: 'Any',optional: false},
+	{name: 'NbAgents',title: "Nombre d'Agents sur le projet",type: 'Int',optional: true},
+	{name: 'Agents',title: "Nom de l'agent",type: 'Any',optional: false}, //// TODO: permettre à l'avenir d'avoir une référence à plusieurs agents sur le même projet
   {name: 'Service',title: "Service",type: 'Any', optional: false},
   {name: 'SousDirection',title: "sous-direction",type: 'Any', optional: false},
 	{name: 'AutoriteHierarchique',title: "Responsable du ou des agent(s)",type: 'Any',optional: false},
