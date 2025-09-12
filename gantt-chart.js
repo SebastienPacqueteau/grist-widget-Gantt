@@ -209,10 +209,13 @@ if (listeProjets.length>10){
 // ==== fonctions propres à Grist =====
 // ====================================
 
+console.log('fichierGanttChart chargé');
+
 grist.ready({
   columns: colonnesNecessaires,
 	requiredAccess: 'full',
 	allowSelectBy: false
+	console.log('Grist Ready');
 });
 
 grist.onRecords((table, mappings) => {
@@ -227,7 +230,7 @@ grist.onRecords((table, mappings) => {
 		  document.getElementById('myChart'),
 		  config
 		);
-
+		console.log('Grist onRecords');
 		console.log(tableau);
 		console.log(colonnes);
     }
