@@ -23,8 +23,8 @@ let colonnesNecessaires = [
   {name: 'Description',title: "Description du projet",type: 'Text',optional: true},
   {name: 'DateDebut',title: "Date de début de la mission",type: 'Date',optional: false},
   {name: 'DateFin',title: "Date de fin de la mission",type: 'Date',optional: false},
-  {name: 'Quotite',title: "Quotité du temps de l'agent (en %)",type: 'Int',optional: false},
-  {name: 'Priorite',title: "Priorite du projet pour le service et la direction",type: 'Int',optional: true}
+  {name: 'Quotite',title: "Quotité du temps de l'agent (en %)",type: 'Any',optional: false},
+  {name: 'Priorite',title: "Priorite du projet pour le service et la direction",type: 'Any',optional: true}
 ];
 
 class Projet{
