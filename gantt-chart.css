@@ -22,8 +22,7 @@
   /*
   /* TODO: barre de défilement pour les longues listes de projets */
 
-  height: 500px;
-  max-height: 350px;
+  max-height: 95%;
   overflow-y: scroll;
   */
 }
@@ -31,7 +30,7 @@
 .chartCard {
   width: 100vw;
   height: calc(100vh);
-  background: rgba(207, 222, 240, 1);
+  background: white; //rgba(207, 222, 240, 1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,6 +38,7 @@
 .chartBox {
   width: 90%;
   max-width: 1200px;
+  height: 80%;
   padding: 20px;
   border-radius: 20px;
   border: solid 3px rgba(53, 88, 162, 1);
