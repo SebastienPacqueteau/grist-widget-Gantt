@@ -21,10 +21,8 @@
 .canvasBoxFixe {
   /*
   /* TODO: barre de défilement pour les longues listes de projets */
-
   max-height: 95%;
   overflow-y: scroll;
-  */
 }
 
 .chartCard {

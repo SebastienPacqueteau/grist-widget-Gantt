@@ -153,14 +153,6 @@ const config = {
 };
 //console.log(config);
 
-
-
-// Création du diagramme :
-const myChart = new Chart(
-  document.getElementById('myChart'),
-  config
-);
-
 function moisPrecedent(){
   dateDebutGantt.setMonth(dateDebutGantt.getMonth() -1);
   dateFinGantt.setMonth(dateFinGantt.getMonth() -1);
@@ -216,12 +208,30 @@ if (listeProjets.length>10){
 // ====================================
 // ==== fonctions propres à Grist =====
 // ====================================
-/*
+
 grist.ready({
   columns: colonnesNecessaires,
 	requiredAccess: 'full',
 	allowSelectBy: false
 });
 
+grist.onRecords((table, mappings) => {
+	if (mapped) {
+		tableau = table;
+		colonnes = mappings;
+		//nomTableau = ;
 
-*/
+
+		// Création du diagramme après initialisation du module Grist:
+		const myChart = new Chart(
+		  document.getElementById('myChart'),
+		  config
+		);
+
+		console.log(tableau);
+		console.log(colonnes);
+    }
+	else{
+		alert("Please map all columns")
+	}
+});
