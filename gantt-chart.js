@@ -215,7 +215,6 @@ grist.ready({
   columns: colonnesNecessaires,
 	requiredAccess: 'full',
 	allowSelectBy: false
-	console.log('Grist Ready');
 });
 
 grist.onRecords((table, mappings) => {
